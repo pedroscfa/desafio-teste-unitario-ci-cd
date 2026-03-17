@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CRUD simples de tarefas: título, descrição e data.""
+"""CRUD simples de tarefas: título, descrição e data."""
 
 from datetime import datetime
 from typing import Dict, List, Optional
