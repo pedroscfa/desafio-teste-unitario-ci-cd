@@ -1,77 +1,66 @@
-# Prática: Testes Unitários + CI/CD
+# Desafio Teste Unitário — CI/CD
 
-## Instruções
+![CI](https://github.com/SEU_USUARIO/desafio-teste-unitario-id/actions/workflows/ci.yml/badge.svg)
 
-1. Faça o fork do repositório:
-   https://github.com/guilherme-augusto-ferraz/desafio-teste-unitario-ci-cd
-
-2. Analise o funcionamento do sistema (CRUD de tarefas).
+CRUD simples de tarefas em Python com testes unitários e pipeline de CI/CD via GitHub Actions.
 
 ---
 
-## Definição de cenários de teste
+## 📁 Estrutura do projeto
 
-Antes de implementar os testes, defina cenários como:
-
-- Criar tarefa com nome válido → resultado esperado: sucesso
-- Criar tarefa com nome vazio → resultado esperado: erro
-- Remover tarefa com ID válido → resultado esperado: sucesso
-- Remover tarefa com ID inexistente → resultado esperado: erro
-
-considerando:
-- Casos de sucesso
-- Casos de erro
-- Casos limite
+```
+├── tarefas_crud.py        # Código principal
+├── test_tarefas.py        # Testes unitários
+├── README.md
+└── .github/
+    └── workflows/
+        └── ci.yml         # Pipeline de CI/CD
+```
 
 ---
 
-## Implementação dos testes
+## ▶️ Como rodar localmente
 
-3. Crie testes unitários para os cenários definidos.
+**Instalar dependências:**
+```bash
+pip install pytest
+```
 
-Você pode utilizar ferramentas de IA como:
-- ChatGPT
-- GitHub Copilot
-- Gemini
-- Etc.
+**Executar os testes:**
+```bash
+pytest test_tarefas.py -v
+```
 
-Importante:
-- Revise os testes gerados
-- Garanta que eles realmente validam o comportamento esperado
-
----
-
-## CI/CD com GitHub Actions
-
-4. Configure uma pipeline de CI/CD para executar os testes automaticamente:
-
-- A pipeline deve rodar a cada **push**
-- Os testes devem ser executados automaticamente
-- O resultado deve ser visível na aba **Actions** do repositório
+**Executar com cobertura:**
+```bash
+pip install pytest-cov
+pytest test_tarefas.py --cov=tarefas_crud --cov-report=term-missing
+```
 
 ---
 
-## Validação
+## 🧪 Cobertura dos testes
 
-6. Faça um commit e push com os testes implementados.
-
-7. Verifique se:
-- A pipeline executa corretamente
-- Os testes passam (ou falham, se houver erro)
-
----
-
-## Opcional – extra
-
-- Quebre propositalmente uma funcionalidade e observe o comportamento da pipeline
-- Adicione novos cenários de teste
-- Inclua badge de status no README
+| Módulo | Cenários testados |
+|---|---|
+| `Tarefa` construtor | strip, vazio, só espaços, atributos corretos |
+| `Tarefa.exibir()` | todos os campos presentes no formato esperado |
+| `validar_data` | válida, vazia, formatos errados, ano bissexto |
+| `criar_tarefa` | adição ao dict, incremento de ID, dados corretos |
+| `listar_tarefas` | lista vazia, uma tarefa, múltiplas tarefas |
+| `obter_id_existente` | válido, inexistente, não numérico, negativo, zero |
+| `atualizar_tarefa` | parcial, campo vazio mantém original, data inválida cancela |
+| `deletar_tarefa` | confirma "s", cancela "n", ID não reutilizado |
 
 ---
 
-## Entrega
+## ⚙️ Pipeline CI/CD
 
-- Link do repositório forkado
-- Testes implementados
-- Pipeline configurada e funcionando
-- Demonstração em aula
+A pipeline executa automaticamente a cada `push` em qualquer branch.
+
+**Passos executados:**
+1. Checkout do repositório
+2. Configuração do Python 3.11
+3. Instalação do `pytest` e `pytest-cov`
+4. Execução dos testes com relatório detalhado
+5. Relatório de cobertura de código
