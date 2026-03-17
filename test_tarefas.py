@@ -3,7 +3,7 @@
 
 import pytest
 from unittest.mock import patch
-from tarefas import (
+from tarefas_crud import (
     Tarefa,
     validar_data,
     criar_tarefa,
